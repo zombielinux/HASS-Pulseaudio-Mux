@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+	.block {
+		display: block;
+	}
+	.container input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+	}
+	.selectorDiv {
+		text-align: center;
+	}
+
+	.selector {
+		text-align: center;
+	}
+</style>
+<body>
+
+
+<script>
+
+var inputs = ["Patio BT", "Living Room BT", "Basement BT", "MBR BT"]
+var outputs = ["Back Patio", "Kitchen", "Living Room", "Basement", "Master Bedroom"]
+
+function sinkSource(input, output) {
+	console.log("Sending "+input+" audio stream to "+output);
+	}
+
+function createOutputs() {
+	for(j=0; j<outputs.length; j++){
+		var outputDiv = document.createElement('div')
+		outputDiv.setAttribute('id', outputs[j])
+		outputDiv.setAttribute('style', 'display: table-cell')
+		outputDiv.setAttribute('class', 'selectorDiv')
+		document.getElementById('firstRow').appendChild(outputDiv)
+		document.getElementById(outputs[j]).innerHTML += outputs[j]+"<br>"		
+		for(i=0; i< inputs.length; i++){
+//			console.log(outputs[i])
+			var button = document.createElement('input')
+			button.setAttribute('type', 'radio')
+			button.setAttribute('name', outputs[j])
+			button.setAttribute('class', 'selector')
+			button.setAttribute('onclick', 'sinkSource(\''+inputs[i]+'\',\''+outputs[j]+'\')')
+			button.setAttribute('id', inputs[i]+outputs[j])
+			document.getElementById(outputs[j]).appendChild(button)
+			document.getElementById(outputs[j]).innerHTML += "<br>"	
+			}
+		}
+	}
+
+function createStuff() { 
+	var megaDiv = document.createElement('div')
+	megaDiv.setAttribute('id', 'bigDiv')
+	megaDiv.setAttribute('style', 'width: 100%; display: table;')
+	document.body.appendChild(megaDiv)
+	var firstRow = document.createElement('div')
+	firstRow.setAttribute('id', 'firstRow')
+	firstRow.setAttribute('style', 'display: table-row')
+	document.getElementById('bigDiv').appendChild(firstRow)
+	var inputDiv = document.createElement('div')
+	inputDiv.setAttribute('id', 'inputs')
+	inputDiv.setAttribute('style', 'display: table-cell')
+	document.getElementById('firstRow').appendChild(inputDiv)
+	document.getElementById('inputs').innerHTML += "INPUTS<br>"
+	for(i=0; i<inputs.length; i++){
+		document.getElementById('inputs').innerHTML += inputs[i]+"<br>"	
+		}
+	createOutputs()
+
+    }
+
+window.onload = createStuff
+</script>
+
+</body>
+</html>
+
